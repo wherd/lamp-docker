@@ -85,8 +85,9 @@ RUN echo "zend_extension=xdebug.so" > /etc/php7/conf.d/xdebug.ini               
 RUN echo "#!/bin/sh" > /start.sh                                                                && \
     echo "mkdir -p /var/www/localhost/htdocs" >> /start.sh                                      && \
     echo "chown -R apache:apache /var/www/localhost/htdocs" >> /start.sh                        && \
+    echo "/usr/sbin/crond" >> /start.sh                                                         && \
     echo "httpd" >> /start.sh                                                                   && \
-    echo "nohup memcached -u apache > /dev/null 2>&1 &" >> /start.sh                                      && \
+    echo "nohup memcached -u apache > /dev/null 2>&1 &" >> /start.sh                            && \
     echo "nohup mysqld --user=root --datadir=/var/lib/mysql > /dev/null 2>&1 &" >> /start.sh    && \
     echo "tail -f /var/log/apache2/access.log" >> /start.sh                                     && \
     chmod u+x /start.sh
